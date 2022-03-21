@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Herbarium Collections</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js"></script>
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+
+<body>
+<style>
+.distance-container {
+position: absolute;
+top: 550px;
+left: 1760px;
+z-index: 1;
+}
+
+.distance-container > * {
+background-color: rgba(255, 255, 255, 0.6);
+color: #364527;
+font-size: 14px;
+font-family: "Century Gothic";
+line-height: 18px;
+display: block;
+margin: 0;
+padding: 5px 10px;
+border-radius: 5px;
+}
+
+@font-face {
+	font-family:"Nathanos";
+	src:url("../exploratory-lab-2/fonts/NATHANOS-YZLD8.OTF") format('opentype');
+}
+
+@font-face {
+	font-family:"RIVERFLOWS";
+	src:url("../exploratory-lab-2/fonts/RIVERFLOWS-MV3EP.TTF") format('truetype');
+}
+
+@font-face {
+	font-family:"Aver";
+	src:url("../exploratory-lab-2/fonts/AVER-OPKO.TTF") format('truetype');
+}
+
+@font-face {
+	font-family:"Century Gothic";
+	src:url("../exploratory-lab-2/fonts/GOTHIC.TTF") format('truetype');
+}
+
+@font-face {
+	font-family:"Reenie Beanie";
+	src:url("/fonts/REENIEBEANIE-REGULAR.TTF") format('truetype');
+}
+
+.map-header1 {
+	position: absolute;
+	font-family: "RIVERFLOWS";
+	top:485px;
+	left:1290px;
+	width: 75px;
+	font-size: 70px;
+	color: #364527;
+}
+.map-header2 {
+	position: absolute;
+	font-family: "Aver";
+	top:610px;
+	left: 1440px;
+	width: 30px;
+	font-size: 30px;
+	color: #364527;
+}
+.map-english {
+	position: absolute;
+	font-family: "Aver";
+	top:630px;
+	left:1320px;
+	width: 350px;
+	font-size: 60px;
+	color: #364527;
+}
+.map-scientific {
+	position: absolute;
+	font-family: "Aver";
+	top:730px;
+	left:1385px;
+	width: 210px;
+	font-size: 25px;
+	color: #364527;
+}
+
+.legend-title {
+	position: absolute;
+	font-family: "RIVERFLOWS";
+	top:3px;
+	left:1790px;
+	width: 50px;
+	font-size: 20px;
+	color: #364527;
+}
+
+.context {
+	position: absolute;
+	font-size:12px;
+	font-family:"Century Gothic";
+	width: 400px;
+	top: 790px;
+	left: 1300px;
+	color: #364527;
+	text-align: center;
+}
+.data-overlay {
+	position: absolute;
+	font-family: "Aver";
+	top: 860px;
+	left: 1675px;
+	width: 300px;
+	font-size: 16px;
+	color: #364527;
+	line-height: 10px;
+}
+
+.map-overlay {
+	position: absolute;
+	top: 10px;
+	right: 55px;
+	background: rgba(255, 255, 255, 0.6);
+	border-radius: 15px;
+}
+
+#features {
+	top: 0;
+	height: 130px;
+	margin-top: 20px;
+	width: 90px;
+}
+
+#legend {
+	padding: 40px;
+	border-radius: 10px;
+	line-height: 35px;
+	height: 450px;
+	width: 80px;
+	font-size: 14px;
+	font-family: "Century Gothic";
+	top:10px;
+	left:1750px;
+}
+
+.legend-key {
+	display: inline-block;
+	border-radius: 20%;
+	width: 15px;
+	height: 15px;
+	margin-right: 5px;
+}
+
+#flyVictoria {
+display: block;
+position: absolute;
+top: 860px;
+left:600px;
+width: 150px;
+height: 40px;
+padding: 10px;
+border: none;
+border-radius: 10px;
+font-size: 16px;
+font-family: "Aver";
+text-align: center;
+color: #67834A;
+background: rgba(255, 255, 255, 0.8);
+}
+
+#flyGulfIslands {
+display: block;
+position: absolute;
+top: 860px;
+left:775px;
+width: 150px;
+height: 40px;
+padding: 10px;
+border: none;
+border-radius: 10px;
+font-size: 16px;
+font-family: "Aver";
+text-align: center;
+color: #67834A;
+background: rgba(255, 255, 255, 0.8);
+}
+
+#flyCentralIsland {
+display: block;
+position: absolute;
+top: 860px;
+left:950px;
+width: 150px;
+height: 40px;
+padding: 10px;
+border: none;
+border-radius: 10px;
+font-size: 16px;
+font-family: "Aver";
+text-align: center;
+color: #67834A;
+background: rgba(255, 255, 255, 0.8);
+}
+
+#flyLowerMainland {
+display: block;
+position: absolute;
+top: 860px;
+left:1125px;
+width: 150px;
+height: 40px;
+padding: 10px;
+border: none;
+border-radius: 10px;
+font-size: 16px;
+font-family: "Aver";
+text-align: center;
+color: #67834A;
+background: rgba(255, 255, 255, 0.8);
+}
+
+.mapboxgl-popup {
+max-width: 400px;
+font-size: 18px;
+font-family: "Reenie Beanie";
+}
+
+img {
+	position: absolute;
+}
+.oakleft {
+	top:610px;
+	left: 1160px;
+	z-index: 1;
+}
+.oakright {
+	top:610px;
+	left: 1620px;
+	z-index: 3;
+}
+</style>
+
+<div class="parent">
+	<img class="oakleft" src="../exploratory-lab-2/images/garryoakl.png" />
+	<img class="oakright" src="../exploratory-lab-2/images/garryoakr.png" />
+</div>
+
+<div id="map"></div>
+<div id="distance" class="distance-container"></div>
+<div class='map-overlay' id='legend'></div>
+<div class='map-header1'><p>Herbarium</p></div>
+<div class='map-header2'><p>Records</p></div>
+<div class='map-english'><p><b>GARRY OAK</b></p></div>
+<div class='map-scientific'><p><i>Quercus garryana</i></p></div>
+<div class='legend-title'><p><b>Season</b></p></div>
+<div class='context'><p><b>Double click</b> on points for collection notes. Navigate using the buttons to <b>explore</b> different regions throughout the Canadian Salish Sea basin. <b>Measure</b> the distance between features by clicking to create a path (click on nodes to clear).<b>Current Garry oak habitat</b> is represented by golden polygons.</p></div>
+<div class='data-overlay'><p><i>Data provided by <a href="https://community.canadensys.net/" target="_blank"; style="color:255;">Canadensys</i></a></p></div>
+
+<div id="map1"></div>
+<br>
+<button id="flyVictoria">Victoria</button>
+
+<div id="map2"></div>
+<br>
+<button id="flyGulfIslands">Gulf Islands</button>
+
+<div id="map3"></div>
+<br>
+<button id="flyCentralIsland">Central Island</button>
+
+<div id="map4"></div>
+<br>
+<button id="flyLowerMainland">Lower Mainland</button>
+
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZW1pbHllYyIsImEiOiJja3p6M3pvNTcwNmxmM2V0OHR5OGFvdXF0In0.ghMWgYGBVgl2V29aH2HU-A';
+	const map = new mapboxgl.Map({
+		container: 'map', // container ID
+		style: 'mapbox://styles/emilyec/cl0u393jz001b14oru8qpnbhs', // custom style url from https://studio.mapbox.com/
+		center: [-122.1, 49.5], // starting position longitude, latitude
+		zoom: 7.1 // starting zoom
+});
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
+const distanceContainer = document.getElementById('distance');
+map.doubleClickZoom.disable();
+
+///turf.length to measure distances between click points https://docs.mapbox.com/mapbox-gl-js/example/measure/ ///
+// GeoJSON object to hold features
+const geojson = {
+'type': 'FeatureCollection',
+'features': []
+};
+
+// draw line between points
+const linestring = {
+'type': 'Feature',
+'geometry': {
+'type': 'LineString',
+'coordinates': []
+}
+};
+
+map.on('load', () => {
+map.addSource('geojson', {
+'type': 'geojson',
+'data': geojson
+});
+
+// measure tool styles
+map.addLayer({
+id: 'measure-points',
+type: 'circle',
+source: 'geojson',
+paint: {
+'circle-radius': 5,
+'circle-color': '#AB380A'
+},
+filter: ['in', '$type', 'Point']
+});
+map.addLayer({
+id: 'measure-lines',
+type: 'line',
+source: 'geojson',
+layout: {
+'line-cap': 'round',
+'line-join': 'round'
+},
+paint: {
+'line-color': '#AB380A',
+'line-width': 2.5
+},
+filter: ['in', '$type', 'LineString']
+});
+
+map.on('click', (e) => {
+const features = map.queryRenderedFeatures(e.point, {
+layers: ['measure-points']
+});
+
+// remove the linestring from the group
+// redraw based on the points collection.
+if (geojson.features.length > 1) geojson.features.pop();
+
+// clear the distance container to populate it with a new value.
+distanceContainer.innerHTML = '';
+
+// if a feature was clicked, remove it from the map.
+if (features.length) {
+const id = features[0].properties.id;
+geojson.features = geojson.features.filter(
+(point) => point.properties.id !== id
+);
+} else {
+const point = {
+'type': 'Feature',
+'geometry': {
+'type': 'Point',
+'coordinates': [e.lngLat.lng, e.lngLat.lat]
+},
+'properties': {
+'id': String(new Date().getTime())
+}
+};
+
+geojson.features.push(point);
+}
+
+if (geojson.features.length > 1) {
+linestring.geometry.coordinates = geojson.features.map(
+(point) => point.geometry.coordinates
+);
+
+geojson.features.push(linestring);
+
+// populate the distanceContainer with the distance. EC converted to metres
+const value = document.createElement('pre');
+const distance = turf.length(linestring);
+value.textContent = `Distance: ${distance.toLocaleString()*1000}m`;
+distanceContainer.appendChild(value);
+}
+
+map.getSource('geojson').setData(geojson);
+});
+});
+
+map.on('mousemove', (e) => {
+const features = map.queryRenderedFeatures(e.point, {
+layers: ['measure-points']
+});
+// change the cursor to a pointer when hovering over a point on the map.
+// otherwise cursor is a crosshair.
+map.getCanvas().style.cursor = features.length
+? 'pointer'
+: 'crosshair';
+});
+
+//create legend//
+map.on('load', function() {
+var layers = ['1890', '1900', '1910', '1920', '1930', '1940', '1950', '1960', '1970', '1980', '1990', '2000', '2010', 'No date'];
+var colors = ['#739a5a','#94b26b','#c6cf84','#efeb9c', '#f7eb9c', '#f7df94', '#f7d38c', "#efc384", "#deae84", "#ce9a7b", "#c69284", "#deaeb5", "#efcfde", "#fff3ff"];
+
+for (i = 0; i < layers.length; i++) {
+				  var layer = layers[i];
+				  var color = colors[i];
+				  var item = document.createElement('div');
+				  var key = document.createElement('span');
+				  key.className = 'legend-key';
+				  key.style.backgroundColor = color;
+
+				  var value = document.createElement('span');
+				  value.innerHTML = layer;
+				  item.appendChild(key);
+				  item.appendChild(value);
+				  legend.appendChild(item);
+				}
+});
+
+//fly to different regions within the Canadian Salish Sea basin//
+document.getElementById('flyVictoria').addEventListener('click', () => {
+// Fly to Victoria
+map.flyTo({
+center: [-123.25,48.51515000],
+zoom: 10,
+essential: true
+});
+});
+
+document.getElementById('flyGulfIslands').addEventListener('click', () => {
+// Fly to the Gulf Islands
+map.flyTo({
+center: [-123.15,48.87],
+zoom: 10,
+essential: true
+});
+});
+
+document.getElementById('flyCentralIsland').addEventListener('click', () => {
+// Fly to the Central Island
+map.flyTo({
+center: [-123.9,49.35023056],
+zoom: 9,
+essential: true
+});
+});
+
+document.getElementById('flyLowerMainland').addEventListener('click', () => {
+// Fly to the Lower Mainland
+map.flyTo({
+center: [-122.1,49.21202500],
+zoom: 9,
+essential: true
+});
+});
+
+//create pop-up listener//
+map.on('dblclick', (event) => {
+  // retrieves info if double-click on marker. distinguish from measure tool
+	//by making this a double instead of single click
+  const features = map.queryRenderedFeatures(event.point, {
+    layers: ['herbarium_records'] //my data layer
+  });
+  if (!features.length) {
+    return;
+  }
+  const feature = features[0];
+
+//set up pop-up boxes with colelction notes
+const popup = new mapboxgl.Popup({ offset: [0, -15] })
+  .setLngLat(feature.geometry.coordinates)
+  .setHTML(
+    `<p style="color:#2A3A34"><b>Collection:</b> ${feature.properties.Collector}</p>
+    <p style="color:#2A3A34"><b>Year:</b> ${feature.properties.Year}</p>
+    <p style="color:#2A3A34"><b>Specimen:</b> ${feature.properties.Scientific}</p>
+    <p style="color:#2A3A34"><b>Specimen Type:</b> ${feature.properties.Spec_Type}</p>`
+  )
+  .addTo(map);
+
+});
+
+</script>
+
+</body>
+</html>
