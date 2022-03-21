@@ -1,6 +1,6 @@
 <b>Exploratory Lab 2</b>
 
-![alt text](https://github.com/emilyec/exploratory-lab-2/blob/969d1c3b89991fdb0ee3973f5ae679c581035bbb/screenshot.PNG "Screenshot")
+![alt text](https://github.com/emilyec/exploratory-lab-2/blob/2ca9c1fded72affd416d4c1e68e41cacbc6da23b/screenshot.PNG "Screenshot")
 
 <a href="https://emilyec.github.io/exploratory-lab-2/herbarium-web" target="_blank">Explore Map</a>
 
