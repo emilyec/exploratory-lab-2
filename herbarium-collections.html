@@ -66,6 +66,7 @@ border-radius: 5px;
 	width: 75px;
 	font-size: 70px;
 	color: #364527;
+	text-shadow: 0px 0px 3px white;
 }
 .map-header2 {
 	position: absolute;
@@ -75,6 +76,7 @@ border-radius: 5px;
 	width: 30px;
 	font-size: 30px;
 	color: #364527;
+	text-shadow: 0px 0px 3px white;
 }
 .map-english {
 	position: absolute;
@@ -84,6 +86,7 @@ border-radius: 5px;
 	width: 350px;
 	font-size: 60px;
 	color: #364527;
+	text-shadow: 0px 0px 3px white;
 }
 .map-scientific {
 	position: absolute;
@@ -93,6 +96,7 @@ border-radius: 5px;
 	width: 210px;
 	font-size: 25px;
 	color: #364527;
+	text-shadow: 0px 0px 3px white;
 }
 
 .legend-title {
@@ -112,8 +116,9 @@ border-radius: 5px;
 	width: 400px;
 	top: 790px;
 	left: 1300px;
-	color: #364527;
+	color: #C76A41;
 	text-align: center;
+	text-shadow: 0px 0px 3px white;
 }
 .data-overlay {
 	position: absolute;
@@ -285,11 +290,18 @@ img {
 <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 <script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoiZW1pbHllYyIsImEiOiJja3p6M3pvNTcwNmxmM2V0OHR5OGFvdXF0In0.ghMWgYGBVgl2V29aH2HU-A';
+
+	/*var bounds = [
+	[-126.26288611, 47.76980833], // Southwest coordinates
+	[-120.84746667, 49.52065833] // Northeast coordinates
+];*/
+
 	const map = new mapboxgl.Map({
 		container: 'map', // container ID
 		style: 'mapbox://styles/emilyec/cl0u393jz001b14oru8qpnbhs', // custom style url from https://studio.mapbox.com/
 		center: [-122.1, 49.5], // starting position longitude, latitude
 		zoom: 7.1 // starting zoom
+		//maxBounds: bounds
 });
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
 const distanceContainer = document.getElementById('distance');
