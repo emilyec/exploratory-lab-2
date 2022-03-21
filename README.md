@@ -1,6 +1,6 @@
 <b>Exploratory Lab 1</b>
 
-![alt text](https://github.com/emilyec/exploratory-lab/blob/7872349b48ee1fc6a299e9d8270f81b01222cf3d/screenshot.png "Screenshot")
+![alt text](https://github.com/emilyec/exploratory-lab-2/blob/969d1c3b89991fdb0ee3973f5ae679c581035bbb/screenshot.PNG "Screenshot")
 
 Link to map: https://emilyec.github.io/blob/exploratory-lab/
 
