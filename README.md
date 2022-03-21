@@ -5,7 +5,10 @@
 <a href="https://emilyec.github.io/exploratory-lab-2/herbarium-web" target="_blank">Explore Map</a>
 
 <b>Reflective analysis</b>
-Who did you design your map for? What questions or needs does the map attempt to raise or address? In what respects is your map successful and unsuccessful in this?
+
+Who did you design your map for? 
+
+What questions or needs does the map attempt to raise or address? In what respects is your map successful and unsuccessful in this?
 
 What process did you follow in the design/iteration of the map? 
 
